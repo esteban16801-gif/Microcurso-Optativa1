@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía Gráfica de Riesgo Ético de la IA en Educación</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fuente Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Iconos Phosphor -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            unesco: {
+              primary: '#0077b6',
+              dark: '#003366',
+              light: '#e0f2fe',
+              accent: '#0284c7'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-unesco-primary selection:text-white">
+
+  <!-- Barra Superior Institucional -->
+  <header class="bg-unesco-dark text-white shadow-md">
+    <div class="bg-unesco-primary h-2 w-full"></div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-unesco-primary/40 text-sky-100 border border-sky-400/30 mb-3">
+            <i class="ph ph-compass text-base"></i> Marco de Competencias IA · UNESCO (Nivel Crear)
+          </span>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white">
+            Guía Gráfica de Riesgo Ético de la IA en Educación
+          </h1>
+          <p class="mt-2 text-sky-100 text-sm sm:text-base max-w-2xl leading-relaxed">
+            Herramienta interactiva para auditar plataformas educativas y determinar su nivel de riesgo según su transparencia, autonomía humana y vigilancia de datos.
+          </p>
+        </div>
+        <!-- Navegación rápida de vistas -->
+        <nav class="flex bg-unesco-primary/20 p-1.5 rounded-xl border border-sky-400/20 self-start md:self-center" aria-label="Modos de la guía">
+          <button id="tab-explorer" onclick="switchMode('explorer')" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all bg-white text-unesco-dark shadow-sm flex items-center gap-2">
+            <i class="ph ph-squares-four text-lg"></i> Explorador Visual
+          </button>
+          <button id="tab-evaluator" onclick="switchMode('evaluator')" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all text-sky-100 hover:text-white flex items-center gap-2">
+            <i class="ph ph-scales text-lg"></i> Evaluador Rápido
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+
+    <!-- SECCIÓN A: EXPLORADOR VISUAL DE INDICADORES -->
+    <section id="section-explorer" class="space-y-6">
+      
+      <!-- Panel de Filtros -->
+      <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <!-- Filtro por Nivel de Riesgo -->
+        <div class="space-y-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-500 block">Filtrar por Nivel de Riesgo</span>
+          <div class="flex flex-wrap gap-2" id="risk-filters">
+            <button onclick="setRiskFilter('all')" data-risk="all" class="filter-risk-btn active px-3.5 py-2 rounded-xl text-sm font-semibold border transition-all bg-unesco-dark text-white border-unesco-dark">
+              Todos los niveles
+            </button>
+            <button onclick="setRiskFilter('low')" data-risk="low" class="filter-risk-btn px-3.5 py-2 rounded-xl text-sm font-semibold border border-emerald-200 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 transition-all flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Riesgo Bajo
+            </button>
+            <button onclick="setRiskFilter('medium')" data-risk="medium" class="filter-risk-btn px-3.5 py-2 rounded-xl text-sm font-semibold border border-amber-200 bg-amber-50 text-amber-800 hover:bg-amber-100 transition-all flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Riesgo Medio
+            </button>
+            <button onclick="setRiskFilter('high')" data-risk="high" class="filter-risk-btn px-3.5 py-2 rounded-xl text-sm font-semibold border border-rose-200 bg-rose-50 text-rose-800 hover:bg-rose-100 transition-all flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-600"></span> Riesgo Alto
+            </button>
+          </div>
+        </div>
+
+        <!-- Filtro por Dimensión -->
+        <div class="space-y-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-500 block">Filtrar por Dimensión Ética</span>
+          <div class="flex flex-wrap gap-2" id="dim-filters">
+            <button onclick="setDimFilter('all')" data-dim="all" class="filter-dim-btn active px-3.5 py-2 rounded-xl text-sm font-semibold border transition-all bg-unesco-primary text-white border-unesco-primary">
+              Todas (3)
+            </button>
+            <button onclick="setDimFilter('transparencia')" data-dim="transparencia" class="filter-dim-btn px-3.5 py-2 rounded-xl text-sm font-medium border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all flex items-center gap-1.5">
+              <i class="ph ph-eye"></i> Transparencia
+            </button>
+            <button onclick="setDimFilter('autonomia')" data-dim="autonomia" class="filter-dim-btn px-3.5 py-2 rounded-xl text-sm font-medium border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all flex items-center gap-1.5">
+              <i class="ph ph-user-focus"></i> Autonomía
+            </button>
+            <button onclick="setDimFilter('vigilancia')" data-dim="vigilancia" class="filter-dim-btn px-3.5 py-2 rounded-xl text-sm font-medium border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all flex items-center gap-1.5">
+              <i class="ph ph-shield-check"></i> Vigilancia
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leyenda Rápida de Categorías -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-emerald-50/80 border border-emerald-200 rounded-xl p-4 flex items-start gap-3">
+          <div class="p-2 bg-emerald-100 text-emerald-700 rounded-lg shrink-0 mt-0.5">
+            <i class="ph-fill ph-check-circle text-xl"></i>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold text-emerald-900">Riesgo Bajo · Uso Aprobado</h2>
+            <p class="text-xs text-emerald-800 mt-1 leading-relaxed">Apta para incorporación en la lista blanca institucional bajo práctica docente habitual.</p>
+          </div>
+        </div>
+        <div class="bg-amber-50/80 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
+          <div class="p-2 bg-amber-100 text-amber-700 rounded-lg shrink-0 mt-0.5">
+            <i class="ph-fill ph-warning text-xl"></i>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold text-amber-900">Riesgo Medio · Uso Supervisado</h2>
+            <p class="text-xs text-amber-800 mt-1 leading-relaxed">Requiere anonimización previa de datos, verificación de fuentes y mediación activa.</p>
+          </div>
+        </div>
+        <div class="bg-rose-50/80 border border-rose-200 rounded-xl p-4 flex items-start gap-3">
+          <div class="p-2 bg-rose-100 text-rose-700 rounded-lg shrink-0 mt-0.5">
+            <i class="ph-fill ph-prohibit text-xl"></i>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold text-rose-900">Riesgo Alto · Restringido / Prohibido</h2>
+            <p class="text-xs text-rose-800 mt-1 leading-relaxed">Inadmisible en entornos escolares por vulnerar derechos, privacidad o agencia humana.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cuadrícula Dinámica de Tarjetas -->
+      <div id="cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Renderizado dinámicamente mediante JS -->
+      </div>
+
+    </section>
+
+    <!-- SECCIÓN B: EVALUADOR RÁPIDO INTERACTIVO -->
+    <section id="section-evaluator" class="hidden space-y-6">
+      
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="bg-unesco-light/60 border-b border-sky-100 px-6 py-5">
+          <div class="flex items-start sm:items-center justify-between flex-col sm:flex-row gap-3">
+            <div>
+              <h2 class="text-xl font-bold text-unesco-dark flex items-center gap-2">
+                <i class="ph-fill ph-calculator text-unesco-primary text-2xl"></i>
+                Evaluador Rápido de Herramienta de IA
+              </h2>
+              <p class="text-sm text-slate-600 mt-1">
+                Selecciona el comportamiento observado en la plataforma para cada dimensión. Se aplica el <strong>Principio de Precaución</strong> de la UNESCO.
+              </p>
+            </div>
+            <button onclick="resetEvaluator()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white text-slate-700 border border-slate-300 hover:bg-slate-100 transition-all flex items-center gap-1.5 shrink-0">
+              <i class="ph ph-arrow-counter-clockwise text-sm"></i> Reiniciar selección
+            </button>
+          </div>
+        </div>
+
+        <div class="p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          <!-- Columna Izquierda: Selectores de las 3 Dimensiones -->
+          <div class="lg:col-span-7 space-y-6">
+            
+            <!-- Dimensión 1: Transparencia -->
+            <div class="space-y-3">
+              <div class="flex items-center gap-2 text-unesco-dark font-bold text-base">
+                <span class="w-7 h-7 rounded-lg bg-unesco-light text-unesco-primary flex items-center justify-center text-sm font-extrabold">1</span>
+                <span>Transparencia y Explicabilidad</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5" id="eval-transparencia">
+                <button type="button" onclick="selectEval('transparencia', 'low')" data-val="low" class="eval-option text-left p-3.5 rounded-xl border-2 border-slate-200 hover:border-emerald-400 transition-all bg-white">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-bold uppercase text-emerald-700">Bajo</span>
+                    <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-snug">Informa modelo, etiqueta salidas IA y permite verificar fuentes.</p>
+                </button>
+
+                <button type="button" onclick="selectEval('transparencia', 'medium')" data-val="medium" class="eval-option text-left p-3.5 rounded-xl border-2 border-slate-200 hover:border-amber-400 transition-all bg-white">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-bold uppercase text-amber-700">Medio</span>
+                    <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-snug">Caja negra parcial con guías claras, pero con posibles alucinaciones.</p>
+                </button>
+
+                <button type="button" onclick="selectEval('transparencia', 'high')" data-val="high" class="eval-option text-left p-3.5 rounded-xl border-2 border-slate-200 hover:border-rose-400 transition-all bg-white">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-bold uppercase text-rose-700">Alto</span>
+                    <span class="w-3 h-3 rounded-full bg-rose-600"></span>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-snug">Opacidad total sin explicabilidad ni auditoría de sesgos.</p>
+                </button>
+              </div>
+            </div>
+
+            <!-- Dimensión 2: Autonomía -->
+            <div class="space-y-3">
+              <div class="flex items-center gap-2 text-unesco-dark font-bold text-base">
+                <span class="w-7 h-7 rounded-lg bg-unesco-light text-unesco-primary flex items-center justify-center text-sm font-extrabold">2</span>
+                <span>Autonomía y Capacidad de Acción Humana</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5" id="eval-autonomia">
+                <button type="button" onclick="selectEval('autonomia', 'low')" data-val="low" class="eval-option text-left p-3.5 rounded-xl border-2 border-slate-200 hover:border-emerald-400 transition-all bg-white">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-bold uppercase text-emerald-700">Bajo</span>
+                    <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-snug">Asistente bajo control docente; fomenta el co-pensamiento.</p>
+                </button>
+
+                <button type="button" onclick="selectEval('autonomia', 'medium')" data-val="medium" class="eval-option text-left p-3.5 rounded-xl border-2 border-slate-200 hover:border-amber-400 transition-all bg-white">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-bold uppercase text-amber-700">Medio</span>
+                    <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-snug">Automatiza tareas rutinarias; requiere validación humana previa.</p>
+                </button>
+
+                <button type="button" onclick="selectEval('autonomia', 'high')" data-val="high" class="eval-option text-left p-3.5 rounded-xl border-2 border-slate-200 hover:border-rose-400 transition-all bg-white">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-bold uppercase text-rose-700">Alto</span>
+                    <span class="w-3 h-3 rounded-full bg-rose-600"></span>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-snug">Califica o clasifica sin supervisión; induce deuda cognitiva.</p>
+                </button>
+              </div>
+            </div>
+
+            <!-- Dimensión 3: Vigilancia -->
+            <div class="space-y-3">
+              <div class="flex items-center gap-2 text-unesco-dark font-bold text-base">
+                <span class="w-7 h-7 rounded-lg bg-unesco-light text-unesco-primary flex items-center justify-center text-sm font-extrabold">3</span>
+                <span>Vigilancia y Privacidad de Datos</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5" id="eval-vigilancia">
+                <button type="button" onclick="selectEval('vigilancia', 'low')" data-val="low" class="eval-option text-left p-3.5 rounded-xl border-2 border-slate-200 hover:border-emerald-400 transition-all bg-white">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-bold uppercase text-emerald-700">Bajo</span>
+                    <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-snug">Sin datos personales ni entrenamiento externo con insumos.</p>
+                </button>
+
+                <button type="button" onclick="selectEval('vigilancia', 'medium')" data-val="medium" class="eval-option text-left p-3.5 rounded-xl border-2 border-slate-200 hover:border-amber-400 transition-all bg-white">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-bold uppercase text-amber-700">Medio</span>
+                    <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-snug">Recopila datos básicos con consentimiento; exige anonimizar.</p>
+                </button>
+
+                <button type="button" onclick="selectEval('vigilancia', 'high')" data-val="high" class="eval-option text-left p-3.5 rounded-xl border-2 border-slate-200 hover:border-rose-400 transition-all bg-white">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-bold uppercase text-rose-700">Alto</span>
+                    <span class="w-3 h-3 rounded-full bg-rose-600"></span>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-snug">Monitoreo biométrico/emocional o explotación comercial de datos.</p>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Columna Derecha: Resultado y Dictamen Accionable -->
+          <div class="lg:col-span-5 flex flex-col">
+            <div id="eval-result-box" class="flex-grow rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 p-6 flex flex-col justify-center items-center text-center transition-all">
+              <div class="w-14 h-14 rounded-2xl bg-unesco-light text-unesco-primary flex items-center justify-center mb-4">
+                <i class="ph ph-clipboard-text text-3xl"></i>
+              </div>
+              <h3 class="text-base font-bold text-slate-800">Dictamen Ético Pendiente</h3>
+              <p class="text-sm text-slate-500 mt-2 max-w-xs leading-relaxed">
+                Selecciona una opción en cada una de las <strong>3 dimensiones</strong> de la izquierda para calcular el nivel de riesgo global y obtener las recomendaciones escolares.
+              </p>
+              <div class="mt-5 flex items-center gap-2 text-xs font-medium text-slate-400">
+                <span id="progress-dots" class="flex gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
+                </span>
+                <span id="progress-text">0 de 3 dimensiones evaluadas</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Pie de página institucional -->
+  <footer class="max-w-6xl mx-auto px-4 sm:px-6 py-6 border-t border-slate-200 mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+    <p>Basado en el <strong>Marco de competencias para docentes en materia de IA</strong> (UNESCO, 2024) — Ámbito 2: Ética de la IA.</p>
+    <p class="font-medium text-unesco-dark">Enfoque centrado en el ser humano y principio de precaución</p>
+  </footer>
+
+  <!-- Toast de notificación para copiado -->
+  <div id="toast" class="fixed bottom-5 right-5 bg-unesco-dark text-white px-4 py-3 rounded-xl shadow-lg text-sm font-medium flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none z-50">
+    <i class="ph-fill ph-check-circle text-emerald-400 text-lg"></i>
+    <span id="toast-msg">Dictamen copiado al portapapeles</span>
+  </div>
+
+  <script>
+    // Base de datos estructurada con las 9 celdas (3 dimensiones x 3 niveles de riesgo)
+    const matrixData = [
+      {
+        dimension: 'transparencia',
+        dimensionLabel: 'Transparencia y Explicabilidad',
+        dimensionIcon: 'ph-eye',
+        risk: 'low',
+        riskLabel: 'Riesgo Bajo · Uso Aprobado',
+        indicators: [
+          'Informa claramente cómo procesa los datos y qué modelo utiliza.',
+          'Etiqueta los contenidos generados por IA de forma explícita.',
+          'Permite verificar fuentes o consultar bibliotecas académicas validadas.'
+        ],
+        action: 'Documentar la ficha técnica en la lista blanca institucional.'
+      },
+      {
+        dimension: 'transparencia',
+        dimensionLabel: 'Transparencia y Explicabilidad',
+        dimensionIcon: 'ph-eye',
+        risk: 'medium',
+        riskLabel: 'Riesgo Medio · Uso Supervisado',
+        indicators: [
+          'Funciona parcialmente como "caja negra", pero ofrece guías de usuario claras.',
+          'Puede presentar alucinaciones o errores fácticos ocasionales.'
+        ],
+        action: 'Exigir contraste obligatorio con fuentes primarias por parte de docentes y alumnos.'
+      },
+      {
+        dimension: 'transparencia',
+        dimensionLabel: 'Transparencia y Explicabilidad',
+        dimensionIcon: 'ph-eye',
+        risk: 'high',
+        riskLabel: 'Riesgo Alto · Restringido / Prohibido',
+        indicators: [
+          'Opacidad total sobre los algoritmos, el entrenamiento y las fuentes de datos.',
+          'Genera respuestas persuasivas sin explicabilidad ni auditoría de sesgos.'
+        ],
+        action: 'Rechazar su adopción institucional y notificar falta de trazabilidad.'
+      },
+      {
+        dimension: 'autonomia',
+        dimensionLabel: 'Autonomía y Acción Humana',
+        dimensionIcon: 'ph-user-focus',
+        risk: 'low',
+        riskLabel: 'Riesgo Bajo · Uso Aprobado',
+        indicators: [
+          'Actúa como asistente de apoyo bajo control y decisión total del docente y estudiante.',
+          'Fomenta el "co-pensamiento" sin reemplazar el razonamiento propio.'
+        ],
+        action: 'Integrar en secuencias didácticas potenciando la agencia estudiantil.'
+      },
+      {
+        dimension: 'autonomia',
+        dimensionLabel: 'Autonomía y Acción Humana',
+        dimensionIcon: 'ph-user-focus',
+        risk: 'medium',
+        riskLabel: 'Riesgo Medio · Uso Supervisado',
+        indicators: [
+          'Automatiza tareas rutinarias o sugiere retroalimentación formativa.',
+          'Riesgo moderado de dependencia cognitiva si no existe mediación pedagógica.'
+        ],
+        action: 'Aplicar regla Human-in-the-loop (revisión humana antes de validar) y bitácoras de co-pensamiento.'
+      },
+      {
+        dimension: 'autonomia',
+        dimensionLabel: 'Autonomía y Acción Humana',
+        dimensionIcon: 'ph-user-focus',
+        risk: 'high',
+        riskLabel: 'Riesgo Alto · Restringido / Prohibido',
+        indicators: [
+          'Toma decisiones autónomas de alto impacto (calificación sumativa o clasificación).',
+          'Usurpa la agencia docente o induce "deuda cognitiva" al sustituir el pensamiento crítico.'
+        ],
+        action: 'Prohibir su uso para evaluaciones sumativas o diagnósticos automatizados.'
+      },
+      {
+        dimension: 'vigilancia',
+        dimensionLabel: 'Vigilancia y Privacidad',
+        dimensionIcon: 'ph-shield-check',
+        risk: 'low',
+        riskLabel: 'Riesgo Bajo · Uso Aprobado',
+        indicators: [
+          'No recopila datos personales ni biométricos de menores.',
+          'Procesamiento local o en entornos cerrados sin reentrenamiento externo.'
+        ],
+        action: 'Aprobar su despliegue en aulas garantizando el resguardo de identidad.'
+      },
+      {
+        dimension: 'vigilancia',
+        dimensionLabel: 'Vigilancia y Privacidad',
+        dimensionIcon: 'ph-shield-check',
+        risk: 'medium',
+        riskLabel: 'Riesgo Medio · Uso Supervisado',
+        indicators: [
+          'Recopila datos básicos de uso con consentimiento informado y políticas explícitas.',
+          'Requiere protocolos estrictos para evitar exposición de datos sensibles.'
+        ],
+        action: 'Aplicar protocolo de anonimización (sin nombres, IDs ni trabajos identificables).'
+      },
+      {
+        dimension: 'vigilancia',
+        dimensionLabel: 'Vigilancia y Privacidad',
+        dimensionIcon: 'ph-shield-check',
+        risk: 'high',
+        riskLabel: 'Riesgo Alto · Restringido / Prohibido',
+        indicators: [
+          'Realiza monitoreo continuo, seguimiento biométrico o reconocimiento emocional.',
+          'Explota datos personales sin consentimiento (práctica prohibida por estándares tipo Ley IA UE).'
+        ],
+        action: 'Bloquear inmediatamente y reportar a la dirección y autoridad de protección de datos.'
+      }
+    ];
+
+    // Estado de filtros del explorador
+    let currentRiskFilter = 'all';
+    let currentDimFilter = 'all';
+
+    // Estado del evaluador
+    const evalState = {
+      transparencia: null,
+      autonomia: null,
+      vigilancia: null
+    };
+
+    // Cambio entre modo Explorador y modo Evaluador
+    function switchMode(mode) {
+      const explorerSec = document.getElementById('section-explorer');
+      const evaluatorSec = document.getElementById('section-evaluator');
+      const tabExp = document.getElementById('tab-explorer');
+      const tabEval = document.getElementById('tab-evaluator');
+
+      if (mode === 'explorer') {
+        explorerSec.classList.remove('hidden');
+        evaluatorSec.classList.add('hidden');
+        tabExp.className = 'px-4 py-2 rounded-lg text-sm font-semibold transition-all bg-white text-unesco-dark shadow-sm flex items-center gap-2';
+        tabEval.className = 'px-4 py-2 rounded-lg text-sm font-semibold transition-all text-sky-100 hover:text-white flex items-center gap-2';
+      } else {
+        explorerSec.classList.add('hidden');
+        evaluatorSec.classList.remove('hidden');
+        tabEval.className = 'px-4 py-2 rounded-lg text-sm font-semibold transition-all bg-white text-unesco-dark shadow-sm flex items-center gap-2';
+        tabExp.className = 'px-4 py-2 rounded-lg text-sm font-semibold transition-all text-sky-100 hover:text-white flex items-center gap-2';
+      }
+    }
+
+    // Configurar filtro de riesgo
+    function setRiskFilter(risk) {
+      currentRiskFilter = risk;
+      document.querySelectorAll('.filter-risk-btn').forEach(btn => {
+        const btnRisk = btn.getAttribute('data-risk');
+        if (btnRisk === risk) {
+          btn.classList.add('ring-2', 'ring-offset-1', 'ring-unesco-primary', 'font-bold');
+        } else {
+          btn.classList.remove('ring-2', 'ring-offset-1', 'ring-unesco-primary', 'font-bold');
+        }
+      });
+      renderCards();
+    }
+
+    // Configurar filtro de dimensión
+    function setDimFilter(dim) {
+      currentDimFilter = dim;
+      document.querySelectorAll('.filter-dim-btn').forEach(btn => {
+        const btnDim = btn.getAttribute('data-dim');
+        if (btnDim === dim) {
+          btn.className = 'filter-dim-btn active px-3.5 py-2 rounded-xl text-sm font-semibold border transition-all bg-unesco-primary text-white border-unesco-primary flex items-center gap-1.5';
+        } else {
+          btn.className = 'filter-dim-btn px-3.5 py-2 rounded-xl text-sm font-medium border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all flex items-center gap-1.5';
+        }
+      });
+      renderCards();
+    }
+
+    // Renderizar tarjetas del explorador
+    function renderCards() {
+      const grid = document.getElementById('cards-grid');
+      const filtered = matrixData.filter(item => {
+        const matchRisk = currentRiskFilter === 'all' || item.risk === currentRiskFilter;
+        const matchDim = currentDimFilter === 'all' || item.dimension === currentDimFilter;
+        return matchRisk && matchDim;
+      });
+
+      const stylesByRisk = {
+        low: {
+          border: 'border-emerald-200',
+          topBar: 'bg-emerald-500',
+          badgeBg: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+          dot: 'bg-emerald-500',
+          actionBg: 'bg-emerald-50/70 text-emerald-900 border-emerald-100'
+        },
+        medium: {
+          border: 'border-amber-200',
+          topBar: 'bg-amber-500',
+          badgeBg: 'bg-amber-50 text-amber-800 border-amber-200',
+          dot: 'bg-amber-500',
+          actionBg: 'bg-amber-50/70 text-amber-900 border-amber-100'
+        },
+        high: {
+          border: 'border-rose-200',
+          topBar: 'bg-rose-600',
+          badgeBg: 'bg-rose-50 text-rose-800 border-rose-200',
+          dot: 'bg-rose-600',
+          actionBg: 'bg-rose-50/70 text-rose-900 border-rose-100'
+        }
+      };
+
+      grid.innerHTML = filtered.map(item => {
+        const st = stylesByRisk[item.risk];
+        const bullets = item.indicators.map(ind => `
+          <li class="flex items-start gap-2 text-sm text-slate-700 leading-relaxed">
+            <span class="w-1.5 h-1.5 rounded-full ${st.dot} mt-2 shrink-0"></span>
+            <span>${ind}</span>
+          </li>
+        `).join('');
+
+        return `
+          <article class="bg-white rounded-2xl border ${st.border} shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden">
+            <div class="h-1.5 w-full ${st.topBar}"></div>
+            <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-3">
+                  <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-unesco-dark">
+                    <i class="ph ${item.dimensionIcon} text-base text-unesco-primary"></i>
+                    ${item.dimensionLabel}
+                  </span>
+                </div>
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold border ${st.badgeBg} mb-4">
+                  <span class="w-2 h-2 rounded-full ${st.dot}"></span>
+                  ${item.riskLabel}
+                </span>
+                <ul class="space-y-2.5">
+                  ${bullets}
+                </ul>
+              </div>
+              <div class="pt-3 border-t border-slate-100">
+                <div class="p-3 rounded-xl border ${st.actionBg} text-xs leading-relaxed">
+                  <strong class="block font-bold mb-0.5">Protocolo sugerido:</strong>
+                  ${item.action}
+                </div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // Selección en el evaluador rápido
+    function selectEval(dimension, value) {
+      evalState[dimension] = value;
+
+      // Actualizar estilos visuales de botones de esa dimensión
+      const container = document.getElementById(`eval-${dimension}`);
+      container.querySelectorAll('.eval-option').forEach(btn => {
+        const val = btn.getAttribute('data-val');
+        btn.className = 'eval-option text-left p-3.5 rounded-xl border-2 transition-all bg-white ';
+        if (val === value) {
+          if (val === 'low') btn.className += 'border-emerald-500 bg-emerald-50/60 ring-2 ring-emerald-200';
+          if (val === 'medium') btn.className += 'border-amber-500 bg-amber-50/60 ring-2 ring-amber-200';
+          if (val === 'high') btn.className += 'border-rose-600 bg-rose-50/60 ring-2 ring-rose-200';
+        } else {
+          btn.className += 'border-slate-200 opacity-75 hover:opacity-100';
+        }
+      });
+
+      updateEvaluationResult();
+    }
+
+    // Cálculo del resultado aplicando Principio de Precaución
+    function updateEvaluationResult() {
+      const values = Object.values(evalState);
+      const completedCount = values.filter(v => v !== null).length;
+      const resultBox = document.getElementById('eval-result-box');
+
+      // Si aún faltan dimensiones por seleccionar
+      if (completedCount < 3) {
+        const dotsHtml = ['transparencia', 'autonomia', 'vigilancia'].map(dim => {
+          const v = evalState[dim];
+          if (v === 'low') return '<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>';
+          if (v === 'medium') return '<span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>';
+          if (v === 'high') return '<span class="w-2.5 h-2.5 rounded-full bg-rose-600"></span>';
+          return '<span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span>';
+        }).join('');
+
+        resultBox.className = 'flex-grow rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 p-6 flex flex-col justify-center items-center text-center transition-all';
+        resultBox.innerHTML = `
+          <div class="w-14 h-14 rounded-2xl bg-unesco-light text-unesco-primary flex items-center justify-center mb-4">
+            <i class="ph ph-clipboard-text text-3xl"></i>
+          </div>
+          <h3 class="text-base font-bold text-slate-800">Dictamen Ético Pendiente</h3>
+          <p class="text-sm text-slate-500 mt-2 max-w-xs leading-relaxed">
+            Completa las dimensiones restantes para obtener la categorización bajo el principio de precaución.
+          </p>
+          <div class="mt-5 flex items-center gap-2 text-xs font-semibold text-unesco-dark">
+            <span class="flex gap-1.5">${dotsHtml}</span>
+            <span>${completedCount} de 3 dimensiones evaluadas</span>
+          </div>
+        `;
+        return;
+      }
+
+      // Principio de precaución:
+      // 1. Si al menos una dimensión es Alto -> Riesgo Alto
+      // 2. Si no hay Alto, pero hay al menos una Medio -> Riesgo Medio
+      // 3. Si todas son Bajo -> Riesgo Bajo
+      let overallRisk = 'low';
+      if (values.includes('high')) {
+        overallRisk = 'high';
+      } else if (values.includes('medium')) {
+        overallRisk = 'medium';
+      }
+
+      const verdicts = {
+        low: {
+          title: 'RIESGO BAJO · USO APROBADO',
+          subtitle: 'Herramienta apta para lista blanca institucional',
+          containerClass: 'border-emerald-500 bg-emerald-50/70',
+          badgeClass: 'bg-emerald-600 text-white',
+          icon: 'ph-seal-check',
+          iconColor: 'text-emerald-600',
+          rationale: 'Las tres dimensiones cumplen con los estándares éticos y normativos centrados en el ser humano.',
+          recommendations: [
+            'Incorporar la plataforma en la Lista Blanca institucional autorizada.',
+            'Mantener el enfoque de co-pensamiento: producción inicial del estudiante antes de interactuar con la IA.',
+            'Revisar semestralmente posibles cambios en los Términos de Servicio.'
+          ]
+        },
+        medium: {
+          title: 'RIESGO MEDIO · USO SUPERVISADO',
+          subtitle: 'Requiere mediación docente y protocolos de protección',
+          containerClass: 'border-amber-500 bg-amber-50/70',
+          badgeClass: 'bg-amber-600 text-white',
+          icon: 'ph-warning-circle',
+          iconColor: 'text-amber-600',
+          rationale: 'Al menos una dimensión presenta vulnerabilidades moderadas que exigen mitigación activa en el aula.',
+          recommendations: [
+            'Anonimización obligatoria: prohibido ingresar nombres reales, documentos o trabajos identificables de alumnos.',
+            'Supervisión humana (Human-in-the-loop): validar toda salida o sugerencia antes de aplicarla.',
+            'Contrastar respuestas de la IA con bibliotecas académicas o fuentes verificadas.'
+          ]
+        },
+        high: {
+          title: 'RIESGO ALTO · RESTRINGIDO / PROHIBIDO',
+          subtitle: 'No apta para entornos educativos escolares',
+          containerClass: 'border-rose-600 bg-rose-50/80',
+          badgeClass: 'bg-rose-600 text-white',
+          icon: 'ph-prohibit',
+          iconColor: 'text-rose-600',
+          rationale: 'Por principio de precaución, basta un indicador crítico (opacidad, vigilancia biométrica o automatización sin control) para desaconsejar su uso.',
+          recommendations: [
+            'Descartar su adopción institucional y evitar su uso con estudiantes menores de edad.',
+            'Nunca delegar calificaciones sumativas, clasificaciones ni monitoreo emocional a este sistema.',
+            'Notificar los hallazgos al equipo directivo y buscar alternativas de código abierto auditadas.'
+          ]
+        }
+      };
+
+      const v = verdicts[overallRisk];
+      const recList = v.recommendations.map(r => `
+        <li class="flex items-start gap-2 text-xs sm:text-sm text-slate-800 leading-relaxed">
+          <i class="ph-bold ph-arrow-right ${v.iconColor} mt-1 shrink-0"></i>
+          <span>${r}</span>
+        </li>
+      `).join('');
+
+      resultBox.className = `flex-grow rounded-2xl border-2 ${v.containerClass} p-6 flex flex-col justify-between text-left transition-all shadow-sm`;
+      resultBox.innerHTML = `
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="px-3 py-1 rounded-full text-xs font-extrabold tracking-wider ${v.badgeClass}">
+              ${v.title}
+            </span>
+            <i class="ph-fill ${v.icon} text-3xl ${v.iconColor}"></i>
+          </div>
+          <h3 class="text-lg font-extrabold text-slate-900">${v.subtitle}</h3>
+          <p class="text-xs text-slate-700 mt-1.5 leading-relaxed">${v.rationale}</p>
+
+          <div class="mt-4 pt-4 border-t border-slate-200/80">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2.5">
+              Recomendaciones para el aula e institución:
+            </h4>
+            <ul class="space-y-2">
+              ${recList}
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-3 border-t border-slate-200/80 flex justify-end">
+          <button type="button" onclick="copyVerdict('${overallRisk}')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-unesco-dark border border-slate-300 hover:bg-slate-100 transition-all flex items-center gap-1.5 shadow-sm">
+            <i class="ph ph-copy text-sm"></i> Copiar dictamen para informe
+          </button>
+        </div>
+      `;
+    }
+
+    // Reiniciar evaluador
+    function resetEvaluator() {
+      evalState.transparencia = null;
+      evalState.autonomia = null;
+      evalState.vigilancia = null;
+
+      document.querySelectorAll('.eval-option').forEach(btn => {
+        btn.className = 'eval-option text-left p-3.5 rounded-xl border-2 border-slate-200 hover:border-unesco-primary transition-all bg-white';
+      });
+
+      updateEvaluationResult();
+    }
+
+    // Copiar resultado al portapapeles de forma segura en iframes
+    function copyVerdict(riskKey) {
+      const mapLabel = { low: 'Riesgo Bajo', medium: 'Riesgo Medio', high: 'Riesgo Alto' };
+      const text = `DICTAMEN DE AUDITORÍA ÉTICA DE IA (Marco UNESCO)\n` +
+        `- Transparencia y Explicabilidad: ${mapLabel[evalState.transparencia]}\n` +
+        `- Autonomía y Capacidad de Acción Humana: ${mapLabel[evalState.autonomia]}\n` +
+        `- Vigilancia y Privacidad de Datos: ${mapLabel[evalState.vigilancia]}\n` +
+        `Resultado Global (Principio de Precaución): ${mapLabel[riskKey].toUpperCase()}`;
+
+      const tempInput = document.createElement('textarea');
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+        showToast('Dictamen copiado al portapapeles');
+      } catch (err) {
+        showToast('No se pudo copiar automáticamente');
+      }
+      document.body.removeChild(tempInput);
+    }
+
+    // Mostrar notificación visual
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      toastMsg.textContent = message;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2800);
+    }
+
+    // Inicializar vista al cargar
+    window.addEventListener('DOMContentLoaded', () => {
+      setRiskFilter('all');
+      renderCards();
+    });
+  </script>
+</body>
+</html>
