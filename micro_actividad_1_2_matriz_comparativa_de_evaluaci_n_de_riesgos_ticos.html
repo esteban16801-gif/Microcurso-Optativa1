@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Micro-actividad 1.2 · Matriz Comparativa de Evaluación de Riesgos Éticos</title>
+  <style>
+    :root {
+      --unesco-blue: #005596;
+      --unesco-dark: #003b69;
+      --unesco-accent: #0077c8;
+      --unesco-light: #e6f0f8;
+      --bg-page: #f4f7fa;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #475569;
+      --border-subtle: #cbd5e1;
+
+      --low-bg: #ecfdf5;
+      --low-border: #6ee7b7;
+      --low-text: #065f46;
+      --low-accent: #059669;
+
+      --med-bg: #fffbeb;
+      --med-border: #fcd34d;
+      --med-text: #92400e;
+      --med-accent: #d97706;
+
+      --high-bg: #fef2f2;
+      --high-border: #fca5a5;
+      --high-text: #991b1b;
+      --high-accent: #dc2626;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--unesco-dark) 0%, var(--unesco-blue) 100%);
+      color: #ffffff;
+      padding: 1.85rem 1.25rem;
+      border-bottom: 4px solid var(--unesco-accent);
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .badge-top {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      padding: 0.28rem 0.78rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 0.7rem;
+    }
+
+    header h1 {
+      font-size: clamp(1.35rem, 2.8vw, 2rem);
+      font-weight: 700;
+      line-height: 1.22;
+      margin-bottom: 0.45rem;
+    }
+
+    header p {
+      font-size: 0.94rem;
+      color: #e2e8f0;
+      max-width: 820px;
+    }
+
+    /* Barra de estado superior sticky */
+    .status-bar {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.75rem 1.25rem;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+    }
+
+    .status-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+      font-size: 0.84rem;
+    }
+
+    .status-pills {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pill-info {
+      background: #f1f5f9;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 0.28rem 0.7rem;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .pill-save {
+      background: var(--low-bg);
+      border: 1px solid var(--low-border);
+      color: var(--low-text);
+      padding: 0.28rem 0.7rem;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .pill-score {
+      background: var(--unesco-light);
+      border: 1px solid #93c5fd;
+      color: var(--unesco-dark);
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .pill-timer {
+      background: #f8fafc;
+      border: 1px solid var(--border-subtle);
+      color: var(--unesco-dark);
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pill-timer.warning {
+      background: var(--high-bg);
+      border-color: var(--high-border);
+      color: var(--high-text);
+    }
+
+    main {
+      padding: 1.75rem 1.25rem 3.25rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.8rem;
+      padding: 1.65rem;
+      box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
+      margin-bottom: 1.5rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Registro inicial */
+    .register-card {
+      max-width: 760px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.68rem 0.85rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      background: #ffffff;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--unesco-blue);
+      box-shadow: 0 0 0 3px rgba(0, 85, 150, 0.14);
+    }
+
+    .info-callout {
+      background: var(--unesco-light);
+      border-left: 4px solid var(--unesco-blue);
+      padding: 0.9rem 1.05rem;
+      border-radius: 0.45rem;
+      font-size: 0.88rem;
+      color: var(--unesco-dark);
+      margin-bottom: 1.35rem;
+    }
+
+    .resume-box {
+      background: var(--med-bg);
+      border: 1px solid var(--med-border);
+      color: var(--med-text);
+      padding: 1rem;
+      border-radius: 0.6rem;
+      margin-bottom: 1.35rem;
+      font-size: 0.88rem;
+    }
+
+    /* Botones */
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.68rem 1.2rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.16s ease, opacity 0.16s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--unesco-blue);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--unesco-dark);
+    }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: #e2e8f0;
+    }
+
+    .btn-sm {
+      padding: 0.48rem 0.85rem;
+      font-size: 0.82rem;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    /* Visor de Evidencia Documental */
+    .evidence-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .evidence-header h2 {
+      font-size: 1.15rem;
+      color: var(--unesco-dark);
+    }
+
+    .evidence-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 0.75rem;
+    }
+
+    .etab-btn {
+      appearance: none;
+      border: 1px solid var(--border-subtle);
+      background: #f8fafc;
+      color: var(--text-main);
+      padding: 0.48rem 0.9rem;
+      border-radius: 0.45rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .etab-btn.active {
+      background: var(--unesco-blue);
+      color: #ffffff;
+      border-color: var(--unesco-blue);
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.15rem;
+    }
+
+    .tool-dossier {
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.65rem;
+      padding: 1.15rem;
+      background: #f8fafc;
+    }
+
+    .tool-dossier.chatgpt {
+      border-top: 4px solid #d97706;
+    }
+
+    .tool-dossier.khanmigo {
+      border-top: 4px solid #059669;
+    }
+
+    .tool-dossier h3 {
+      font-size: 1.02rem;
+      color: var(--unesco-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .tool-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.85rem;
+      font-weight: 600;
+    }
+
+    .clause-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      font-size: 0.86rem;
+    }
+
+    .clause-list li {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.45rem;
+      padding: 0.65rem 0.8rem;
+    }
+
+    .clause-list strong {
+      display: block;
+      color: var(--unesco-blue);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.2rem;
+    }
+
+    /* Matriz Interactiva por Dimensión */
+    .matrix-intro {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .matrix-intro h2 {
+      font-size: 1.2rem;
+      color: var(--unesco-dark);
+    }
+
+    .dimension-card {
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.75rem;
+      margin-bottom: 1.35rem;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+    }
+
+    .dimension-header {
+      background: #f1f5f9;
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dimension-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--unesco-dark);
+    }
+
+    .dimension-guide {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      width: 100%;
+      margin-top: 0.2rem;
+    }
+
+    .dim-status-pill {
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: #e2e8f0;
+      color: var(--text-muted);
+    }
+
+    .dim-status-pill.done {
+      background: var(--low-bg);
+      color: var(--low-text);
+      border: 1px solid var(--low-border);
+    }
+
+    .comparison-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    @media (max-width: 820px) {
+      .comparison-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tool-cell {
+      padding: 1.15rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tool-cell:first-child {
+      border-right: 1px solid #e2e8f0;
+    }
+
+    @media (max-width: 820px) {
+      .tool-cell:first-child {
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+      }
+    }
+
+    .cell-tool-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+    }
+
+    .cell-tool-badge.gpt { color: #b45309; }
+    .cell-tool-badge.khan { color: #047857; }
+
+    .field-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .risk-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .risk-opt-btn {
+      appearance: none;
+      border: 1.5px solid var(--border-subtle);
+      background: #ffffff;
+      color: var(--text-main);
+      padding: 0.48rem 0.35rem;
+      border-radius: 0.45rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.14s ease;
+    }
+
+    .risk-opt-btn:hover:not(:disabled) {
+      border-color: var(--unesco-blue);
+    }
+
+    .risk-opt-btn.selected.low {
+      background: var(--low-bg);
+      border-color: var(--low-accent);
+      color: var(--low-text);
+    }
+
+    .risk-opt-btn.selected.med {
+      background: var(--med-bg);
+      border-color: var(--med-accent);
+      color: var(--med-text);
+    }
+
+    .risk-opt-btn.selected.high {
+      background: var(--high-bg);
+      border-color: var(--high-accent);
+      color: var(--high-text);
+    }
+
+    .risk-opt-btn:disabled {
+      cursor: default;
+    }
+
+    .finding-select {
+      width: 100%;
+      padding: 0.55rem 0.7rem;
+      border: 1.5px solid var(--border-subtle);
+      border-radius: 0.45rem;
+      font-size: 0.84rem;
+      color: var(--text-main);
+      background: #ffffff;
+      margin-bottom: 0.85rem;
+    }
+
+    .finding-select:focus {
+      outline: none;
+      border-color: var(--unesco-blue);
+    }
+
+    .cell-feedback {
+      margin-top: 0.75rem;
+      padding: 0.8rem 0.9rem;
+      border-radius: 0.5rem;
+      border: 1px solid;
+      font-size: 0.84rem;
+    }
+
+    .cell-feedback.ok {
+      background: var(--low-bg);
+      border-color: var(--low-border);
+      color: var(--low-text);
+    }
+
+    .cell-feedback.partial {
+      background: var(--med-bg);
+      border-color: var(--med-border);
+      color: var(--med-text);
+    }
+
+    .cell-feedback.err {
+      background: var(--high-bg);
+      border-color: var(--high-border);
+      color: var(--high-text);
+    }
+
+    .cell-feedback strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.86rem;
+    }
+
+    /* Resultados y Síntesis Final */
+    .score-hero {
+      text-align: center;
+      padding: 1.65rem 1rem;
+      background: var(--unesco-light);
+      border: 1px solid #bfdbfe;
+      border-radius: 0.75rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .level-badge {
+      display: inline-block;
+      background: var(--unesco-blue);
+      color: #ffffff;
+      padding: 0.32rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.55rem;
+    }
+
+    .score-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--unesco-dark);
+      line-height: 1.12;
+      margin-bottom: 0.35rem;
+    }
+
+    .mail-status-banner {
+      padding: 0.95rem 1.05rem;
+      border-radius: 0.6rem;
+      border: 1px solid;
+      margin-bottom: 1.35rem;
+      font-size: 0.88rem;
+    }
+
+    .mail-status-banner.sending {
+      background: var(--unesco-light);
+      border-color: #93c5fd;
+      color: var(--unesco-dark);
+    }
+
+    .mail-status-banner.sent {
+      background: var(--low-bg);
+      border-color: var(--low-border);
+      color: var(--low-text);
+    }
+
+    .mail-status-banner.error {
+      background: var(--med-bg);
+      border-color: var(--med-border);
+      color: var(--med-text);
+    }
+
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+    }
+
+    .summary-table th, .summary-table td {
+      border: 1px solid var(--border-subtle);
+      padding: 0.65rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .summary-table th {
+      background: #f1f5f9;
+      color: var(--unesco-dark);
+      font-weight: 700;
+    }
+
+    .recs-box {
+      background: #f8fafc;
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--unesco-blue);
+      border-radius: 0.55rem;
+      padding: 1.15rem 1.25rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .recs-box h3 {
+      font-size: 1rem;
+      color: var(--unesco-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .recs-box ul {
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+      color: var(--text-main);
+    }
+
+    .recs-box li {
+      margin-bottom: 0.45rem;
+    }
+
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      background: #ffffff;
+    }
+
+    @media print {
+      .status-bar, .action-grid, .no-print, footer { display: none !important; }
+      body { background: #ffffff; }
+      .card { border: none; box-shadow: none; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="badge-top">Ámbito 2: Ética de la IA · Nivel 3: Crear · Competencia 2.3 (UNESCO)</div>
+      <h1>Micro-actividad 1.2: Matriz Comparativa de Evaluación de Riesgos Éticos</h1>
+      <p>Comparación y análisis de las condiciones de servicio (ToS), privacidad y supervisión humana entre <strong>ChatGPT (Plan Gratuito - OpenAI)</strong> y <strong>Khanmigo (Khan Academy Educación)</strong>.</p>
+    </div>
+  </header>
+
+  <div class="status-bar hidden" id="status-bar">
+    <div class="status-inner">
+      <div class="status-pills">
+        <span class="pill-info" id="user-display">Participante</span>
+        <span class="pill-save" id="save-indicator">Autoguardado activo</span>
+      </div>
+      <div class="status-pills">
+        <span class="pill-score" id="live-score-pill">Celdas auditadas: 0 / 12 · Puntaje: 0 / 12</span>
+        <span class="pill-timer" id="timer-display">45:00</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+
+    <!-- PANTALLA 1: REGISTRO DEL PARTICIPANTE -->
+    <section class="card register-card" id="screen-register">
+      <h2 style="font-size:1.25rem; color:#003b69; margin-bottom:0.45rem;">Registro para Auditoría Comparativa (45 min)</h2>
+      <p style="font-size:0.92rem; color:#475569; margin-bottom:1.2rem;">
+        Diligencia tus datos para iniciar la matriz. Tus avances se guardan automáticamente en este navegador y al finalizar se enviará una copia de tu calificación y dictamen comparativo a tu correo.
+      </p>
+
+      <div id="resume-container" class="resume-box hidden"></div>
+
+      <div class="info-callout">
+        <strong>Metodología de la actividad:</strong><br>
+        1. Consulta el <strong>Visor de Evidencia Documental Real</strong> con extractos verificables de los Términos de Servicio (ToS), DPA y guías de uso de <em>ChatGPT Free</em> y <em>Khanmigo</em>.<br>
+        2. Evalúa las <strong>6 dimensiones éticas de la UNESCO</strong> para ambas plataformas (12 celdas en total) seleccionando el nivel de riesgo y el hallazgo documental que lo sustenta.<br>
+        3. Confirma cada celda para recibir <strong>retroalimentación formativa inmediata</strong> y genera tu reporte institucional final.
+      </div>
+
+      <form id="register-form" onsubmit="startActivity(event)">
+        <div class="form-group">
+          <label for="input-name">Nombre completo del docente / participante *</label>
+          <input type="text" id="input-name" class="form-control" placeholder="Ej. Carlos Andrés Ramírez" required minlength="3" />
+        </div>
+        <div class="form-group">
+          <label for="input-email">Correo electrónico institucional o personal *</label>
+          <input type="email" id="input-email" class="form-control" placeholder="docente@institucion.edu.co" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Iniciar Auditoría Comparativa</button>
+      </form>
+    </section>
+
+    <!-- PANTALLA 2: VISOR DOCUMENTAL + MATRIZ INTERACTIVA -->
+    <section id="screen-workspace" class="hidden">
+
+      <!-- VISOR DE EVIDENCIA DOCUMENTAL REAL -->
+      <div class="card no-print">
+        <div class="evidence-header">
+          <div>
+            <h2>1. Evidencia Documental Real para Auditar (ToS, Privacidad y DPA)</h2>
+            <p style="font-size:0.86rem; color:#475569;">Revisa las condiciones contractuales reales de ambas herramientas antes de completar cada dimensión de la matriz.</p>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" id="toggle-evidence-btn" onclick="toggleEvidencePanel()">Ocultar fichas documentales</button>
+        </div>
+
+        <div id="evidence-body">
+          <div class="evidence-tabs">
+            <button type="button" class="etab-btn active" onclick="filterEvidenceView('both', this)">Vista Comparativa Paralela (Ambas)</button>
+            <button type="button" class="etab-btn" onclick="filterEvidenceView('gpt', this)">Solo ChatGPT (Plan Gratuito)</button>
+            <button type="button" class="etab-btn" onclick="filterEvidenceView('khan', this)">Solo Khanmigo (Khan Academy)</button>
+          </div>
+
+          <div class="evidence-grid">
+            <!-- DOSSIER A: CHATGPT FREE -->
+            <article class="tool-dossier chatgpt" id="dossier-gpt">
+              <h3>Herramienta A: ChatGPT (Plan Gratuito · OpenAI)</h3>
+              <div class="tool-sub">Modelo de consumo abierto · Sin contrato institucional escolar</div>
+              <ul class="clause-list">
+                <li>
+                  <strong>Privacidad y Entrenamiento (Terms of Use / Privacy Policy):</strong>
+                  Por defecto, OpenAI puede utilizar las conversaciones e insumos ingresados en cuentas gratuitas de consumidor para entrenar y mejorar sus modelos, salvo que el usuario desactive manualmente la opción <em>"Mejorar el modelo para todos"</em> en Configuración.
+                </li>
+                <li>
+                  <strong>Cumplimiento Normativo y Edad (ToS - Requisitos de Edad):</strong>
+                  Edad mínima de 13 años (usuarios de 13 a 17 años requieren permiso de padre/tutor). La cuenta gratuita de consumidor <strong>no incluye</strong> Acuerdo de Procesamiento de Datos (DPA) escolar ni certificación FERPA/COPPA para instituciones educativas.
+                </li>
+                <li>
+                  <strong>Transparencia y Veracidad (Usage Policies):</strong>
+                  Advierte que el modelo puede producir información inexacta ("alucinaciones"), no cita automáticamente fuentes verificadas en el modo base y su arquitectura interna funciona como caja negra comercial.
+                </li>
+                <li>
+                  <strong>Autonomía y Diseño Pedagógico:</strong>
+                  Diseñado como asistente multipropósito que entrega respuestas directas y ensayos completos a solicitud, lo que favorece la delegación cognitiva si no hay mediación docente estricta.
+                </li>
+                <li>
+                  <strong>Equidad, Sesgos y Sostenibilidad:</strong>
+                  Entrenado masivamente con corpus de internet mayoritariamente anglosajones (riesgo de sesgos culturales y lingüísticos); opera sobre modelos fundacionales de gran escala en la nube con alta demanda energética e hídrica.
+                </li>
+              </ul>
+            </article>
+
+            <!-- DOSSIER B: KHANMIGO -->
+            <article class="tool-dossier khanmigo" id="dossier-khan">
+              <h3>Herramienta B: Khanmigo (Khan Academy Educación)</h3>
+              <div class="tool-sub">Tutor y asistente pedagógico K-12 · Entorno educativo supervisado</div>
+              <ul class="clause-list">
+                <li>
+                  <strong>Privacidad y Soberanía de Datos (DPA Escolar):</strong>
+                  Bajo convenios institucionales (Khan Academy Districts), los datos de estudiantes y docentes permanecen bajo control de la escuela y <strong>no se utilizan</strong> para entrenar modelos públicos de terceros (OpenAI/Microsoft Azure bajo acuerdo de cero retención para entrenamiento).
+                </li>
+                <li>
+                  <strong>Cumplimiento Normativo Escolar (FERPA / COPPA / GDPR):</strong>
+                  Diseñado específicamente para entornos escolares K-12; ofrece Acuerdo de Procesamiento de Datos (DPA) formal, cumplimiento con FERPA y COPPA, y cuentas vinculadas a supervisión parental o institucional para menores de 13 años.
+                </li>
+                <li>
+                  <strong>Transparencia y Moderación Pedagógica:</strong>
+                  Integra capas de moderación de contenido educativo, advertencias explícitas sobre posibles errores de la IA y alineación curricular con el banco de contenidos verificados de Khan Academy, aunque sigue empleando un LLM comercial subyacente.
+                </li>
+                <li>
+                  <strong>Autonomía, Supervisión Humana y Co-Pensamiento:</strong>
+                  Programado con enfoque socrático: se niega a hacer la tarea o entregar respuestas directas, guiando con preguntas paso a paso. Además, conserva el historial completo visible para el docente y los padres con alertas de seguridad.
+                </li>
+                <li>
+                  <strong>Equidad, Inclusión y Gobernanza:</strong>
+                  Integra herramientas de accesibilidad y soporte multilingüe, requiere validación institucional previa ("lista blanca") y mantiene la evaluación sumativa y decisión final exclusivamente en manos del docente.
+                </li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <!-- MATRIZ INTERACTIVA DE 6 DIMENSIONES -->
+      <div class="card">
+        <div class="matrix-intro">
+          <div>
+            <h2>2. Diligenciamiento de la Matriz de Evaluación de Riesgos Éticos</h2>
+            <p style="font-size:0.86rem; color:#475569;">Para cada dimensión, selecciona el <strong>Nivel de Riesgo</strong> (Bajo, Medio o Alto) y el <strong>Hallazgo Documental</strong> en ambas plataformas, luego pulsa <em>Evaluar celda</em>.</p>
+          </div>
+        </div>
+
+        <div id="matrix-container"></div>
+
+        <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid #e2e8f0; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1rem;">
+          <p style="font-size:0.86rem; color:#475569;" id="completion-hint">
+            Completa y confirma las 12 celdas de la matriz para generar tu dictamen final y enviar la copia de calificación a tu correo.
+          </p>
+          <button type="button" class="btn btn-primary" id="btn-finish-matrix" onclick="finishMatrix()" disabled>
+            Finalizar matriz y emitir dictamen institucional
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PANTALLA 3: REPORTE COMPARATIVO FINAL Y ENVÍO DE NOTA -->
+    <section class="card hidden" id="screen-results">
+      <div class="score-hero">
+        <div class="level-badge" id="res-level">Nivel alcanzado</div>
+        <div class="score-number" id="res-score">0 / 12 pts</div>
+        <p id="res-meta" style="font-size:0.88rem; color:#334155;"></p>
+      </div>
+
+      <div class="mail-status-banner sending" id="mail-banner">
+        Preparando envío automático de copia de calificación y matriz comparativa...
+      </div>
+
+      <p id="res-global-feedback" style="font-size:0.93rem; color:#1e293b; margin-bottom:1.35rem;"></p>
+
+      <h3 style="font-size:1.05rem; color:#003b69; margin-bottom:0.75rem;">Síntesis Comparativa Resuelta (6 Dimensiones UNESCO)</h3>
+      <div style="overflow-x:auto;">
+        <table class="summary-table">
+          <thead>
+            <tr>
+              <th style="width:22%;">Dimensión Ética</th>
+              <th style="width:39%;">ChatGPT (Plan Gratuito)</th>
+              <th style="width:39%;">Khanmigo (Khan Academy)</th>
+            </tr>
+          </thead>
+          <tbody id="res-table-body"></tbody>
+        </table>
+      </div>
+
+      <div class="recs-box">
+        <h3>Recomendaciones Éticas Aplicables al Entorno Educativo (Borrador de Guía Institucional)</h3>
+        <ul>
+          <li><strong>Clasificación en Lista Blanca Institucional:</strong> Adoptar entornos educativos con DPA firmado y cumplimiento de protección de datos de menores (como Khanmigo bajo convenio escolar) para el trabajo directo con estudiantes, restringiendo las cuentas gratuitas abiertas de consumo (como ChatGPT Free) a uso docente con datos estrictamente anonimizados.</li>
+          <li><strong>Protocolo de Anonimización y Soberanía de Datos:</strong> Prohibir el ingreso de nombres completos, calificaciones, diagnósticos psicopedagógicos o trabajos identificables de estudiantes en plataformas abiertas que reentrenen modelos comerciales con los insumos del aula.</li>
+          <li><strong>Regla de Supervisión Humana (Human-in-the-loop) y Co-Pensamiento:</strong> Mantener toda evaluación sumativa bajo criterio exclusivo del docente y privilegiar interacciones socráticas que eviten la deuda cognitiva y exijan contraste con fuentes académicas verificadas.</li>
+        </ul>
+      </div>
+
+      <div class="action-grid">
+        <button type="button" class="btn btn-primary" onclick="sendEmailAutomatically(true)">Reenviar copia a mi correo</button>
+        <button type="button" class="btn btn-secondary" onclick="openMailtoFallback()">Abrir en mi app de correo</button>
+        <button type="button" class="btn btn-secondary" onclick="copyReportToClipboard()">Copiar reporte al portapapeles</button>
+        <button type="button" class="btn btn-secondary" onclick="window.print()">Imprimir / Guardar PDF</button>
+      </div>
+
+      <div style="margin-top:1.25rem; text-align:right;" class="no-print">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="resetAllData()">Reiniciar auditoría</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Micromódulo 1: Auditoría Ética y Guías de Uso Institucional de la IA · Marco de Competencias para Docentes en Materia de IA (UNESCO, Nivel Crear).
+  </footer>
+
+  <script>
+    // =========================================================================
+    // CONFIGURACIÓN DE ENVÍO AUTOMÁTICO (Opcional para el docente creador)
+    // =========================================================================
+    const CONFIG_ENVIO = {
+      // Si deseas recibir copia automática de todas las matrices entregadas, coloca aquí tu correo:
+      CORREO_DOCENTE_COPIA: "",
+      // Opcional: URL de Google Apps Script / Webhook personalizado:
+      WEBHOOK_PERSONALIZADO_URL: ""
+    };
+
+    const STORAGE_KEY = "micro_act_1_2_unesco_v1";
+    const TOTAL_SECONDS = 45 * 60;
+
+    // 6 Dimensiones Éticas UNESCO x 2 Herramientas = 12 Celdas Evaluables
+    const DIMENSIONS = [
+      {
+        id: "d1",
+        title: "Dimensión 1: Privacidad, Soberanía de Datos y Entrenamiento",
+        guide: "¿Qué ocurre con los textos, consultas y datos ingresados por docentes y estudiantes?",
+        gpt: {
+          correctRisk: "high",
+          correctFinding: 1,
+          findings: [
+            "No recopila ningún dato ni utiliza las conversaciones para entrenar modelos.",
+            "Por defecto usa las conversaciones para entrenar modelos salvo desactivación manual; carece de aislamiento institucional.",
+            "Almacena datos únicamente en servidores locales del colegio sin conexión externa."
+          ],
+          feedbackOk: "Diagnóstico acertado (Riesgo Alto): En el plan gratuito de consumo, OpenAI puede emplear las interacciones para entrenar futuros modelos por defecto. Subir trabajos o datos de estudiantes vulnera la soberanía de datos y la privacidad de menores (UNESCO).",
+          feedbackErr: "Revisa los ToS de ChatGPT Free: aunque permite desactivar manualmente el historial/entrenamiento en ajustes individuales, no ofrece aislamiento institucional ni garantía contractual por defecto, por lo que ingresar datos escolares representa un Riesgo Alto."
+        },
+        khan: {
+          correctRisk: "low",
+          correctFinding: 0,
+          findings: [
+            "Bajo convenio escolar, los datos pertenecen a la institución y no entrenan modelos públicos de terceros.",
+            "Vende las conversaciones estudiantiles a anunciantes educativos.",
+            "Exige publicar los ensayos de los alumnos en un repositorio abierto."
+          ],
+          feedbackOk: "Diagnóstico acertado (Riesgo Bajo): Khanmigo (entorno escolar) protege la soberanía institucional de los datos y garantiza contractualmente que las interacciones de aula no reentrenan modelos comerciales externos.",
+          feedbackErr: "Verifica la ficha de Khanmigo: a diferencia de los chatbots gratuitos de consumo, su arquitectura escolar impide que las conversaciones de los estudiantes se usen para entrenar modelos públicos, ubicándolo en Riesgo Bajo en privacidad."
+        }
+      },
+      {
+        id: "d2",
+        title: "Dimensión 2: Cumplimiento Normativo Escolar (DPA, FERPA/COPPA y Edad)",
+        guide: "¿Cuenta con respaldo legal para menores de edad y Acuerdos de Procesamiento de Datos (DPA)?",
+        gpt: {
+          correctRisk: "high",
+          correctFinding: 2,
+          findings: [
+            "Incluye certificación automática FERPA y COPPA para primaria en su plan gratuito.",
+            "Está certificado exclusivamente para niños menores de 10 años sin permiso parental.",
+            "Restringe el uso a mayores de 13 años (con permiso parental hasta los 17) y no ofrece DPA ni cumplimiento FERPA/COPPA en el plan gratuito."
+          ],
+          feedbackOk: "Diagnóstico acertado (Riesgo Alto): Usar ChatGPT gratuito directamente con menores de 13 años viola los propios Términos de Uso de OpenAI, y su uso institucional sin DPA incumple normativas de protección de datos escolares.",
+          feedbackErr: "Atención al marco normativo: la versión gratuita para consumidores de OpenAI prohíbe el uso por menores de 13 años y no incluye DPA escolar (FERPA/COPPA), lo que constituye un Riesgo Alto si se adopta sin contrato institucional."
+        },
+        khan: {
+          correctRisk: "low",
+          correctFinding: 1,
+          findings: [
+            "Prohíbe cualquier convenio con distritos escolares o colegios.",
+            "Ofrece DPA institucional, cumplimiento FERPA/COPPA y cuentas gestionadas con autorización escolar/parental.",
+            "Opera sin verificación de edad ni políticas de protección infantil."
+          ],
+          feedbackOk: "Diagnóstico acertado (Riesgo Bajo): Khanmigo está diseñado específicamente para K-12 con respaldo contractual (DPA) y cumplimiento de estándares internacionales de privacidad infantil (FERPA/COPPA).",
+          feedbackErr: "Consulta la ficha de Khanmigo: la plataforma cuenta con DPA institucional y cumplimiento FERPA/COPPA para entornos K-12, lo que corresponde a un Riesgo Bajo."
+        }
+      },
+      {
+        id: "d3",
+        title: "Dimensión 3: Transparencia, Explicabilidad y Gestión de Alucinaciones",
+        guide: "¿Informa sobre sus limitaciones y evita presentar errores persuasivos como verdades absolutas?",
+        gpt: {
+          correctRisk: "med",
+          correctFinding: 0,
+          findings: [
+            "Advierte que puede cometer errores ('alucinaciones'), pero opera como caja negra comercial y exige contraste docente obligatorio.",
+            "Garantiza 100% de exactitud fáctica con citas verificadas en todas sus respuestas gratuitas.",
+            "Publica el código fuente completo y todos los pesos de su modelo abierto."
+          ],
+          feedbackOk: "Diagnóstico acertado (Riesgo Medio): OpenAI advierte sobre posibles imprecisiones, pero su funcionamiento estocástico de caja negra exige que docentes y estudiantes contrasten siempre los resultados con fuentes primarias.",
+          feedbackErr: "Revisa la categoría de Riesgo Medio: ChatGPT advierte limitaciones en sus guías, pero puede generar alucinaciones convincentes sin fuentes verificadas, requiriendo uso supervisado y verificación crítica."
+        },
+        khan: {
+          correctRisk: "med",
+          correctFinding: 2,
+          findings: [
+            "Elimina por completo cualquier posibilidad de error porque no usa modelos de lenguaje.",
+            "Oculta al docente el historial de interacciones del estudiante.",
+            "Aunque alinea respuestas con contenidos curriculares verificados y etiqueta la IA, sigue basándose en un LLM que requiere supervisión humana ante posibles fallos."
+          ],
+          feedbackOk: "Diagnóstico acertado (Riesgo Medio): Aunque Khanmigo incorpora barreras curriculares y mayor trazabilidad pedagógica, sigue apoyándose en modelos generativos susceptibles de imprecisiones, por lo que mantiene un Riesgo Medio que exige supervisión docente.",
+          feedbackErr: "Ten presente el principio de precaución de la UNESCO: incluso en plataformas educativas especializadas como Khanmigo, la base generativa LLM puede cometer errores ocasionales, situando esta dimensión en Riesgo Medio (uso supervisado)."
+        }
+      },
+      {
+        id: "d4",
+        title: "Dimensión 4: Autonomía, Agencia Humana y Prevención de Deuda Cognitiva",
+        guide: "¿Fomenta el co-pensamiento y preserva la decisión docente o sustituye el esfuerzo intelectual?",
+        gpt: {
+          correctRisk: "med",
+          correctFinding: 1,
+          findings: [
+            "Bloquea automáticamente cualquier solicitud de redactar ensayos o resolver ejercicios.",
+            "Entrega respuestas directas y textos completos a demanda, generando alto riesgo de deuda cognitiva si no hay mediación pedagógica.",
+            "Sustituye legalmente al docente en la emisión de calificaciones finales oficiales."
+          ],
+          feedbackOk: "Diagnóstico acertado (Riesgo Medio): ChatGPT Free no usurpa por sí mismo la calificación oficial si el docente no delega la nota, pero su diseño orientado a dar respuestas inmediatas induce deuda cognitiva si se usa sin secuencias de co-pensamiento.",
+          feedbackErr: "Analiza el impacto pedagógico: ChatGPT gratuito está diseñado para resolver tareas directamente ('prompt -> respuesta final'), lo que exige mediación activa del docente (Riesgo Medio) para evitar la delegación del pensamiento crítico."
+        },
+        khan: {
+          correctRisk: "low",
+          correctFinding: 0,
+          findings: [
+            "Incorpora tutoría socrática (guía con preguntas sin dar la respuesta directa) y conserva trazabilidad visible para el docente.",
+            "Redacta ensayos completos listos para entregar sin intervención del alumno.",
+            "Impide que el profesor revise o modifique las sugerencias de retroalimentación."
+          ],
+          feedbackOk: "Diagnóstico acertado (Riesgo Bajo): Khanmigo está diseñado bajo principios de co-pensamiento y tutoría socrática, protegiendo el esfuerzo intelectual del estudiante y manteniendo al docente en control.",
+          feedbackErr: "Observa la diferencia de diseño pedagógico: Khanmigo rechaza resolver la tarea por el estudiante y aplica preguntas socráticas con historial visible para el docente, lo que corresponde a Riesgo Bajo."
+        }
+      },
+      {
+        id: "d5",
+        title: "Dimensión 5: Sesgos, Equidad e Inclusión Educativa",
+        guide: "¿Mitiga sesgos culturales/lingüísticos y ofrece condiciones de accesibilidad inclusiva?",
+        gpt: {
+          correctRisk: "med",
+          correctFinding: 2,
+          findings: [
+            "Está libre de cualquier sesgo cultural porque fue entrenado solo con currículos latinoamericanos.",
+            "Bloquea el acceso a lectores de pantalla y tecnologías de asistencia.",
+            "Presenta sesgos inherentes a datos masivos de internet (predominio anglosajón) que requieren revisión crítica de pertinencia cultural."
+          ],
+          feedbackOk: "Diagnóstico acertado (Riesgo Medio): Los modelos fundacionales generales reflejan sesgos estadísticos de internet y menor representación de culturas o lenguas locales, exigiendo revisión crítica docente antes de llevar sus materiales al aula.",
+          feedbackErr: "Recuerda el análisis documental: ChatGPT está entrenado con datos masivos de internet donde predominan perspectivas anglosajonas, generando un Riesgo Medio de sesgos culturales que el docente debe auditar."
+        },
+        khan: {
+          correctRisk: "low",
+          correctFinding: 1,
+          findings: [
+            "Solo funciona en inglés y excluye adaptaciones para estudiantes con necesidades educativas.",
+            "Integra alineación curricular, controles de seguridad inclusiva y soporte multilingüe adaptado a niveles escolares.",
+            "Clasifica automáticamente a los estudiantes según su nivel socioeconómico."
+          ],
+          feedbackOk: "Diagnóstico acertado (Riesgo Bajo): Khanmigo incorpora salvaguardas pedagógicas específicas para diversidad de niveles educativos, accesibilidad y soporte multilingüe dentro de un entorno escolar controlado.",
+          feedbackErr: "Revisa la ficha de Khanmigo: al integrar filtros de equidad educativa, soporte multilingüe y adaptación curricular K-12, se ubica en Riesgo Bajo bajo acompañamiento docente."
+        }
+      },
+      {
+        id: "d6",
+        title: "Dimensión 6: Gobernanza, Corresponsabilidad y Decisión Institucional",
+        guide: "Integrando todas las dimensiones auditadas, ¿cuál es el dictamen global para cada plataforma en la escuela?",
+        gpt: {
+          correctRisk: "high",
+          correctFinding: 0,
+          findings: [
+            "Riesgo Alto para uso directo por estudiantes (sin DPA ni privacidad garantizada); solo viable para preparación docente con datos 100% anonimizados.",
+            "Riesgo Bajo: puede incorporarse sin restricciones en la lista blanca para niños de primaria.",
+            "Riesgo Medio: apta para que los estudiantes suban sus calificaciones y documentos de identidad."
+          ],
+          feedbackOk: "Dictamen global acertado (Riesgo Alto / Restringido): Bajo el principio de precaución de la UNESCO, la versión gratuita de consumidor no debe usarse con estudiantes ni recibir datos institucionales; su uso se restringe al docente bajo anonimización estricta.",
+          feedbackErr: "Aplica el principio de precaución de la UNESCO: al presentar Riesgo Alto en privacidad (entrenamiento por defecto) y cumplimiento normativo escolar (sin DPA ni edad <13), ChatGPT Free queda catalogado globalmente como Riesgo Alto / Uso Restringido."
+        },
+        khan: {
+          correctRisk: "low",
+          correctFinding: 2,
+          findings: [
+            "Riesgo Alto: debe prohibirse completamente en cualquier institución educativa.",
+            "Riesgo Medio: solo puede usarse si los estudiantes crean cuentas personales anónimas sin permiso del colegio.",
+            "Riesgo Bajo (Apto para Lista Blanca Institucional): viable para adopción escolar formal con convenio DPA, supervisión docente y protocolo de verificación."
+          ],
+          feedbackOk: "Dictamen global acertado (Riesgo Bajo / Lista Blanca): Al cumplir con DPA escolar, protección de datos de menores, tutoría socrática y supervisión docente, Khanmigo es apto para lista blanca institucional manteniendo siempre la validación humana.",
+          feedbackErr: "Integra los hallazgos de las dimensiones previas: dado que Khanmigo cuenta con DPA escolar, protección FERPA/COPPA y diseño socrático supervisado, su categorización institucional es Riesgo Bajo (apto para lista blanca)."
+        }
+      }
+    ];
+
+    // Estado persistente
+    let state = {
+      name: "",
+      email: "",
+      remainingSeconds: TOTAL_SECONDS,
+      // cells: { "d1_gpt": { risk: "high", finding: 1, confirmed: true, points: 1 } }
+      cells: {},
+      completed: false,
+      verificationCode: "",
+      emailSent: false
+    };
+
+    let timerInterval = null;
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        const badge = document.getElementById("save-indicator");
+        if (badge) {
+          badge.textContent = "Guardado · " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+        }
+      } catch (e) {
+        console.warn("Error guardando estado en localStorage:", e);
+      }
+    }
+
+    function init() {
+      const saved = loadState();
+      if (saved && saved.name && saved.email) {
+        const resumeBox = document.getElementById("resume-container");
+        resumeBox.classList.remove("hidden");
+        const confirmedCount = Object.values(saved.cells || {}).filter(c => c.confirmed).length;
+        resumeBox.innerHTML = `
+          <strong>Sesión guardada detectada: ${escapeHtml(saved.name)} (${escapeHtml(saved.email)})</strong><br>
+          Avance registrado: ${confirmedCount} de 12 celdas evaluadas.<br><br>
+          <button type="button" class="btn btn-primary btn-sm" onclick="resumeSavedSession()">Continuar auditoría guardada</button>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="discardSavedSession()">Iniciar nuevo registro</button>
+        `;
+      }
+    }
+
+    function resumeSavedSession() {
+      const saved = loadState();
+      if (!saved) return;
+      state = saved;
+      enterWorkspace();
+    }
+
+    function discardSavedSession() {
+      localStorage.removeItem(STORAGE_KEY);
+      document.getElementById("resume-container").classList.add("hidden");
+    }
+
+    function startActivity(event) {
+      event.preventDefault();
+      const nameVal = document.getElementById("input-name").value.trim();
+      const emailVal = document.getElementById("input-email").value.trim();
+      if (!nameVal || !emailVal) return;
+
+      state = {
+        name: nameVal,
+        email: emailVal,
+        remainingSeconds: TOTAL_SECONDS,
+        cells: {},
+        completed: false,
+        verificationCode: generateCode(),
+        emailSent: false
+      };
+      saveState();
+      enterWorkspace();
+    }
+
+    function enterWorkspace() {
+      document.getElementById("screen-register").classList.add("hidden");
+      document.getElementById("status-bar").classList.remove("hidden");
+      document.getElementById("user-display").textContent = `${state.name} (${state.email})`;
+
+      if (state.completed) {
+        showResultsScreen();
+      } else {
+        document.getElementById("screen-workspace").classList.remove("hidden");
+        startTimer();
+        renderMatrix();
+        updateProgressUI();
+      }
+    }
+
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      updateTimerUI();
+      timerInterval = setInterval(() => {
+        if (state.remainingSeconds <= 0) {
+          clearInterval(timerInterval);
+          return;
+        }
+        state.remainingSeconds -= 1;
+        updateTimerUI();
+        if (state.remainingSeconds % 10 === 0) saveState();
+      }, 1000);
+    }
+
+    function updateTimerUI() {
+      const mins = Math.floor(state.remainingSeconds / 60);
+      const secs = state.remainingSeconds % 60;
+      const el = document.getElementById("timer-display");
+      el.textContent = `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+      el.classList.toggle("warning", state.remainingSeconds <= 300);
+    }
+
+    function toggleEvidencePanel() {
+      const body = document.getElementById("evidence-body");
+      const btn = document.getElementById("toggle-evidence-btn");
+      const isHidden = body.classList.toggle("hidden");
+      btn.textContent = isHidden ? "Mostrar fichas documentales" : "Ocultar fichas documentales";
+    }
+
+    function filterEvidenceView(mode, btn) {
+      document.querySelectorAll(".etab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const gpt = document.getElementById("dossier-gpt");
+      const khan = document.getElementById("dossier-khan");
+      gpt.classList.toggle("hidden", mode === "khan");
+      khan.classList.toggle("hidden", mode === "gpt");
+    }
+
+    function getCellKey(dimId, toolKey) {
+      return `${dimId}_${toolKey}`;
+    }
+
+    function calculateTotalPoints() {
+      return Object.values(state.cells).reduce((acc, cell) => acc + (cell.confirmed ? (cell.points || 0) : 0), 0);
+    }
+
+    function getConfirmedCellsCount() {
+      return Object.values(state.cells).filter(c => c.confirmed).length;
+    }
+
+    function updateProgressUI() {
+      const confirmedCount = getConfirmedCellsCount();
+      const totalPts = calculateTotalPoints();
+      document.getElementById("live-score-pill").textContent = `Celdas auditadas: ${confirmedCount} / 12 · Puntaje: ${totalPts.toFixed(1).replace(".0", "")} / 12`;
+
+      const finishBtn = document.getElementById("btn-finish-matrix");
+      const hint = document.getElementById("completion-hint");
+      if (confirmedCount === 12) {
+        finishBtn.disabled = false;
+        hint.innerHTML = `<strong style="color:#065f46;">¡Matriz completada (12/12 celdas)!</strong> Ya puedes generar el dictamen institucional y enviar la copia de calificación.`;
+      } else {
+        finishBtn.disabled = true;
+        hint.textContent = `Faltan ${12 - confirmedCount} celdas por confirmar para habilitar el dictamen institucional final.`;
+      }
+    }
+
+    function renderMatrix() {
+      const container = document.getElementById("matrix-container");
+      container.innerHTML = DIMENSIONS.map(dim => {
+        const gptCell = state.cells[getCellKey(dim.id, "gpt")] || {};
+        const khanCell = state.cells[getCellKey(dim.id, "khan")] || {};
+        const bothDone = gptCell.confirmed && khanCell.confirmed;
+
+        return `
+          <div class="dimension-card" id="card-${dim.id}">
+            <div class="dimension-header">
+              <div>
+                <div class="dimension-title">${escapeHtml(dim.title)}</div>
+                <div class="dimension-guide">${escapeHtml(dim.guide)}</div>
+              </div>
+              <span class="dim-status-pill ${bothDone ? "done" : ""}">
+                ${bothDone ? "Dimensión auditada" : "Pendiente"}
+              </span>
+            </div>
+            <div class="comparison-columns">
+              ${renderToolCellHTML(dim, "gpt", "Herramienta A: ChatGPT (Plan Gratuito)", "gpt", gptCell)}
+              ${renderToolCellHTML(dim, "khan", "Herramienta B: Khanmigo (Khan Academy)", "khan", khanCell)}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderToolCellHTML(dim, toolKey, toolLabel, badgeClass, cellState) {
+      const config = dim[toolKey];
+      const isLocked = Boolean(cellState.confirmed);
+      const selectedRisk = cellState.risk || "";
+      const selectedFinding = cellState.finding !== undefined && cellState.finding !== null ? String(cellState.finding) : "";
+      const canConfirm = !isLocked && selectedRisk !== "" && selectedFinding !== "";
+
+      let feedbackHtml = "";
+      if (isLocked) {
+        const riskMatch = selectedRisk === config.correctRisk;
+        const findingMatch = Number(selectedFinding) === config.correctFinding;
+        const riskNames = { low: "Riesgo Bajo", med: "Riesgo Medio", high: "Riesgo Alto" };
+
+        let statusClass = "err";
+        let statusHeading = `Requiere revisión · Dictamen esperado: ${riskNames[config.correctRisk]}`;
+        let bodyMsg = config.feedbackErr;
+
+        if (riskMatch && findingMatch) {
+          statusClass = "ok";
+          statusHeading = `Diagnóstico Completo (+1.0 pt) · ${riskNames[config.correctRisk]}`;
+          bodyMsg = config.feedbackOk;
+        } else if (riskMatch || findingMatch) {
+          statusClass = "partial";
+          statusHeading = `Diagnóstico Parcial (+0.5 pts) · Dictamen esperado: ${riskNames[config.correctRisk]}`;
+          bodyMsg = config.feedbackOk;
+        }
+
+        feedbackHtml = `
+          <div class="cell-feedback ${statusClass}">
+            <strong>${escapeHtml(statusHeading)}</strong>
+            <span>${escapeHtml(bodyMsg)}</span>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="tool-cell">
+          <div>
+            <div class="cell-tool-badge ${badgeClass}">${escapeHtml(toolLabel)}</div>
+
+            <span class="field-label">1. Clasificación de Riesgo Ético:</span>
+            <div class="risk-selector">
+              <button type="button" class="risk-opt-btn low ${selectedRisk === "low" ? "selected" : ""}"
+                onclick="selectCellRisk('${dim.id}', '${toolKey}', 'low')" ${isLocked ? "disabled" : ""}>
+                Riesgo Bajo
+              </button>
+              <button type="button" class="risk-opt-btn med ${selectedRisk === "med" ? "selected" : ""}"
+                onclick="selectCellRisk('${dim.id}', '${toolKey}', 'med')" ${isLocked ? "disabled" : ""}>
+                Riesgo Medio
+              </button>
+              <button type="button" class="risk-opt-btn high ${selectedRisk === "high" ? "selected" : ""}"
+                onclick="selectCellRisk('${dim.id}', '${toolKey}', 'high')" ${isLocked ? "disabled" : ""}>
+                Riesgo Alto
+              </button>
+            </div>
+
+            <label class="field-label" for="sel-${dim.id}-${toolKey}">2. Hallazgo en Términos de Servicio / Documentación:</label>
+            <select id="sel-${dim.id}-${toolKey}" class="finding-select"
+              onchange="selectCellFinding('${dim.id}', '${toolKey}', this.value)" ${isLocked ? "disabled" : ""}>
+              <option value="">-- Selecciona la evidencia contractual --</option>
+              ${config.findings.map((f, idx) => `
+                <option value="${idx}" ${selectedFinding === String(idx) ? "selected" : ""}>${escapeHtml(f)}</option>
+              `).join("")}
+            </select>
+          </div>
+
+          <div>
+            ${!isLocked ? `
+              <button type="button" class="btn btn-primary btn-sm btn-block"
+                onclick="confirmCell('${dim.id}', '${toolKey}')" ${canConfirm ? "" : "disabled"}>
+                Evaluar celda y ver retroalimentación
+              </button>
+            ` : ""}
+            ${feedbackHtml}
+          </div>
+        </div>
+      `;
+    }
+
+    function selectCellRisk(dimId, toolKey, riskValue) {
+      const key = getCellKey(dimId, toolKey);
+      if (state.cells[key] && state.cells[key].confirmed) return;
+      state.cells[key] = {
+        ...(state.cells[key] || {}),
+        risk: riskValue
+      };
+      saveState();
+      renderMatrix();
+    }
+
+    function selectCellFinding(dimId, toolKey, findingIndexStr) {
+      const key = getCellKey(dimId, toolKey);
+      if (state.cells[key] && state.cells[key].confirmed) return;
+      state.cells[key] = {
+        ...(state.cells[key] || {}),
+        finding: findingIndexStr === "" ? null : Number(findingIndexStr)
+      };
+      saveState();
+      renderMatrix();
+    }
+
+    function confirmCell(dimId, toolKey) {
+      const key = getCellKey(dimId, toolKey);
+      const cell = state.cells[key];
+      if (!cell || !cell.risk || cell.finding === null || cell.finding === undefined) return;
+
+      const dim = DIMENSIONS.find(d => d.id === dimId);
+      const config = dim[toolKey];
+      const riskMatch = cell.risk === config.correctRisk;
+      const findingMatch = Number(cell.finding) === config.correctFinding;
+
+      let points = 0;
+      if (riskMatch && findingMatch) points = 1;
+      else if (riskMatch || findingMatch) points = 0.5;
+
+      state.cells[key] = {
+        ...cell,
+        confirmed: true,
+        points
+      };
+
+      saveState();
+      renderMatrix();
+      updateProgressUI();
+    }
+
+    function finishMatrix() {
+      if (getConfirmedCellsCount() < 12) return;
+      if (timerInterval) clearInterval(timerInterval);
+      state.completed = true;
+      if (!state.verificationCode) state.verificationCode = generateCode();
+      saveState();
+      showResultsScreen();
+    }
+
+    function getLevelInfo(points) {
+      const pct = Math.round((points / 12) * 100);
+      const grade5 = ((points / 12) * 5).toFixed(2);
+      if (points >= 10) {
+        return {
+          level: `Auditor Institucional Experto (${pct}% · Nota: ${grade5}/5.0)`,
+          desc: "Demuestras dominio riguroso en la inspección de Términos de Servicio, DPA escolares y arquitectura pedagógica de plataformas de IA bajo el Marco de Competencias de la UNESCO (Nivel Crear). Estás preparado para redactar el Borrador de Guía de Uso Institucional."
+        };
+      } else if (points >= 7) {
+        return {
+          level: `Auditor en Consolidación (${pct}% · Nota: ${grade5}/5.0)`,
+          desc: "Identificas los riesgos centrales de privacidad y supervisión humana, aunque conviene reforzar la diferenciación entre plataformas abiertas de consumo y entornos educativos con acuerdos DPA/FERPA. Revisa el desglose comparativo inferior."
+        };
+      } else {
+        return {
+          level: `Requiere Revisión Documental (${pct}% · Nota: ${grade5}/5.0)`,
+          desc: "Te sugerimos revisar nuevamente las fichas de evidencia documental (ToS, uso de datos para entrenamiento y cumplimiento DPA) y repetir el ejercicio antes de formular la guía institucional."
+        };
+      }
+    }
+
+    function showResultsScreen() {
+      document.getElementById("screen-workspace").classList.add("hidden");
+      document.getElementById("screen-results").classList.remove("hidden");
+
+      const points = calculateTotalPoints();
+      const pct = Math.round((points / 12) * 100);
+      const grade5 = ((points / 12) * 5).toFixed(2);
+      const levelInfo = getLevelInfo(points);
+      const riskLabels = { low: "Riesgo Bajo", med: "Riesgo Medio", high: "Riesgo Alto" };
+
+      document.getElementById("res-level").textContent = levelInfo.level;
+      document.getElementById("res-score").textContent = `${points.toFixed(1).replace(".0", "")} / 12 pts (${grade5} / 5.0)`;
+      document.getElementById("res-meta").textContent = `Participante: ${state.name} · Correo: ${state.email} · Código: ${state.verificationCode}`;
+      document.getElementById("res-global-feedback").textContent = levelInfo.desc;
+
+      const tbody = document.getElementById("res-table-body");
+      tbody.innerHTML = DIMENSIONS.map(dim => {
+        const gCell = state.cells[getCellKey(dim.id, "gpt")] || {};
+        const kCell = state.cells[getCellKey(dim.id, "khan")] || {};
+
+        return `
+          <tr>
+            <td><strong>${escapeHtml(dim.title)}</strong></td>
+            <td>
+              <strong>Tu dictamen:</strong> ${escapeHtml(riskLabels[gCell.risk] || "—")} (${gCell.points || 0} pt)<br>
+              <strong>Referencia UNESCO:</strong> ${escapeHtml(riskLabels[dim.gpt.correctRisk])} — ${escapeHtml(dim.gpt.findings[dim.gpt.correctFinding])}
+            </td>
+            <td>
+              <strong>Tu dictamen:</strong> ${escapeHtml(riskLabels[kCell.risk] || "—")} (${kCell.points || 0} pt)<br>
+              <strong>Referencia UNESCO:</strong> ${escapeHtml(riskLabels[dim.khan.correctRisk])} — ${escapeHtml(dim.khan.findings[dim.khan.correctFinding])}
+            </td>
+          </tr>
+        `;
+      }).join("");
+
+      if (!state.emailSent) {
+        sendEmailAutomatically(false);
+      } else {
+        const banner = document.getElementById("mail-banner");
+        banner.className = "mail-status-banner sent";
+        banner.innerHTML = `<strong>Copia enviada automáticamente</strong> a <strong>${escapeHtml(state.email)}</strong>. Revisa tu bandeja de entrada o carpeta de Spam.`;
+      }
+    }
+
+    function buildPlainReport() {
+      const points = calculateTotalPoints();
+      const pct = Math.round((points / 12) * 100);
+      const grade5 = ((points / 12) * 5).toFixed(2);
+      const levelInfo = getLevelInfo(points);
+      const riskLabels = { low: "Riesgo Bajo", med: "Riesgo Medio", high: "Riesgo Alto" };
+
+      const lines = [
+        "CONSTANCIA DE RESULTADOS · MICRO-ACTIVIDAD 1.2 (MATRIZ COMPARATIVA DE RIESGOS ÉTICOS - UNESCO)",
+        `Participante: ${state.name}`,
+        `Correo: ${state.email}`,
+        `Calificación: ${points.toFixed(1).replace(".0", "")} / 12 pts (${pct}% · Escala 5.0: ${grade5})`,
+        `Nivel: ${levelInfo.level}`,
+        `Código de verificación: ${state.verificationCode}`,
+        "",
+        "SÍNTESIS COMPARATIVA (CHATGPT PLAN GRATUITO vs. KHANMIGO):",
+        ...DIMENSIONS.map(dim => {
+          const g = state.cells[getCellKey(dim.id, "gpt")] || {};
+          const k = state.cells[getCellKey(dim.id, "khan")] || {};
+          return `- ${dim.title}\n  * ChatGPT Free: ${riskLabels[g.risk] || "N/A"} (${g.points || 0} pt)\n  * Khanmigo: ${riskLabels[k.risk] || "N/A"} (${k.points || 0} pt)`;
+        })
+      ];
+      return lines.join("\n");
+    }
+
+    async function sendEmailAutomatically(isManualRetry) {
+      const banner = document.getElementById("mail-banner");
+      banner.className = "mail-status-banner sending";
+      banner.textContent = `Enviando copia automática de la calificación y matriz comparativa a ${state.email}...`;
+
+      const points = calculateTotalPoints();
+      const pct = Math.round((points / 12) * 100);
+      const grade5 = ((points / 12) * 5).toFixed(2);
+      const levelInfo = getLevelInfo(points);
+
+      const payload = {
+        _subject: `Nota Micro-actividad 1.2 (${grade5}/5.0 · ${points}/12 pts) - ${state.name}`,
+        _template: "table",
+        _captcha: "false",
+        Actividad: "Micro-actividad 1.2: Matriz Comparativa de Evaluación de Riesgos Éticos",
+        Participante: state.name,
+        Correo: state.email,
+        Calificacion_Puntos: `${points.toFixed(1).replace(".0", "")} / 12 (${pct}%)`,
+        Nota_Escala_5: `${grade5} / 5.0`,
+        Nivel_Alcanzado: levelInfo.level,
+        Codigo_Verificacion: state.verificationCode,
+        Detalle_Matriz: buildPlainReport()
+      };
+
+      if (CONFIG_ENVIO.CORREO_DOCENTE_COPIA) {
+        payload._cc = CONFIG_ENVIO.CORREO_DOCENTE_COPIA;
+      }
+
+      try {
+        const endpoint = CONFIG_ENVIO.WEBHOOK_PERSONALIZADO_URL || `https://formsubmit.co/ajax/${encodeURIComponent(state.email)}`;
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) throw new Error("Error HTTP " + response.status);
+
+        state.emailSent = true;
+        saveState();
+        banner.className = "mail-status-banner sent";
+        banner.innerHTML = `<strong>Copia enviada automáticamente</strong> a <strong>${escapeHtml(state.email)}</strong> (${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}). Revisa tu bandeja de entrada o carpeta de Spam.`;
+      } catch (err) {
+        banner.className = "mail-status-banner error";
+        banner.innerHTML = `No fue posible completar el envío automático en segundo plano (posible bloqueo de red escolar). Usa <strong>"Abrir en mi app de correo"</strong> o <strong>"Imprimir / Guardar PDF"</strong> para conservar tu constancia.`;
+      }
+    }
+
+    function openMailtoFallback() {
+      const points = calculateTotalPoints();
+      const grade5 = ((points / 12) * 5).toFixed(2);
+      const subject = encodeURIComponent(`Resultados Micro-actividad 1.2 (${grade5}/5.0) - ${state.name}`);
+      const body = encodeURIComponent(buildPlainReport());
+      const cc = CONFIG_ENVIO.CORREO_DOCENTE_COPIA ? `&cc=${encodeURIComponent(CONFIG_ENVIO.CORREO_DOCENTE_COPIA)}` : "";
+      window.location.href = `mailto:${encodeURIComponent(state.email)}?subject=${subject}${cc}&body=${body}`;
+    }
+
+    function copyReportToClipboard() {
+      const text = buildPlainReport();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+      const banner = document.getElementById("mail-banner");
+      banner.className = "mail-status-banner sent";
+      banner.textContent = "Reporte comparativo copiado al portapapeles. Ya puedes pegarlo en tu plataforma o documento.";
+    }
+
+    function fallbackCopy(text) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+
+    function resetAllData() {
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    }
+
+    function generateCode() {
+      return "UNESCO-1.2-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    init();
+  </script>
+</body>
+</html>
